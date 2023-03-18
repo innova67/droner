@@ -4,3 +4,8 @@ footer {
 	background-color: dimgrey;
 	color: black;
 }
+
+#qr-reader {
+	width: 50%;
+	align-self: center;
+}
