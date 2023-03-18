@@ -1,6 +1,19 @@
+html {
+	font-family: Helvetica;
+}
+
+nav {
+	background-color: bisque;
+}
+.datos {
+	background-color: cadetblue;
+}
+.seriales {
+	background-color: cadetblue;
+}
+
 footer {
 	text-align: center;
-	padding: 10px;
 	background-color: dimgrey;
 	color: black;
 }
