@@ -1,21 +1,22 @@
 html {
-	font-family: Helvetica;
+	font-family: Helvetica, sans-serif;
 }
 
 nav {
 	background-color: bisque;
 }
-.datos {
+#cliente {
 	background-color: cadetblue;
 }
-.seriales {
-	background-color: cadetblue;
+#seriales {
+	background-color: beige;
 }
 
 footer {
 	text-align: center;
-	background-color: dimgrey;
-	color: black;
+	background-color: grey;
+	color: white;
+	padding: 10px;
 }
 
 /* #qr-reader {
