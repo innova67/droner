@@ -16,9 +16,42 @@
 			<h1>AEROPIX</h1>
 		</nav>
 		
-		<div id="container">
+		<div class="main-container">
 			<div id="cliente">
 				<h2>Datos Cliente</h2>
+				<form action="main.js" >
+					<div class="input-cliente">
+						<div id="nom">
+							<input type="text" name="c-nom" id="c-nombre">
+						</div>
+						<div id="apell">
+							<input type="text" name="c-ap" id="c-apellidos">
+						</div>
+						<div id="emp">
+							<input type="text" name="c-emp" id="c-empresa" placeholder="Particular">
+						</div>
+						<div id="dir">
+							<input type="text" name="c-dir" id="c-direccion">
+						</div>
+						<div id="email">
+							<input type="text" name="c-email" id="c-email">
+						</div>
+						<div id="tel">
+							<input type="tel" name="c-tel" id="c-telefono" size="20" minlength="6">
+						</div>
+						<div id="dep">
+							<input type="text" name="c-dep" id="c-departamento" placeholder="Santa Cruz, Bolivia">
+						</div>
+					</div>
+					
+					<label for="c-nombre">Nombres</label>
+					<label for="c-apellidos">Apellidos</label>
+					<label for="c-empresa">Empresa</label>
+					<label for="c-direccion">Dirección</label>
+					<label for="c-email">Email</label>
+					<label for="c-telefono">Teléfono</label>
+					<label for="c-departamento">Departamento</label>
+				</form>
 			</div>
 			<hr />
 
