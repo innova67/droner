@@ -46,8 +46,6 @@ var departamento = document.getElementById("c-departamento").value;
 fcliente.addEventListener("submit", (event) => {
 	event.preventDefault();
 
-	validarDatos();
-
 	console.log(
 		nombre,
 		apellido,
