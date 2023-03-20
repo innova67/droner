@@ -1,16 +1,21 @@
 // --------------- LECTOR QR ---------------
 var resultContainer = document.getElementById("qr-results");
 var countResults = 0;
+var lastQr = null;
 
 // lo que pasa cuando se detecta el QR
 function onScanSuccess(decodedText, decodedResult) {
-	// handle the scanned code as you like, for example:
-	// mostrar en consola
-	console.log(`Code matched = ${decodedText}`, decodedResult);
-	// sumar contador
-	++countResults;
-	// mostrar en la pagina lo que se detecta
-	resultContainer.innerHTML += `<div>[${countResults}] - ${decodedText}</div>`;
+	
+	if (lastQr != decodedText) {
+		// consola
+		console.log(`Code matched = ${decodedText}`, decodedResult);
+		// guardar codigo
+		lastQr = decodedText;
+		// sumar contador
+		++countResults;
+		// mostrar en la pagina lo que se detecta
+		resultContainer.innerHTML += `<div>[${countResults}] - ${decodedText}</div>`;
+	}
 }
 
 // lo que pasa cuando no se detecta nada
