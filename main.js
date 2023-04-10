@@ -3,9 +3,8 @@ var resultContainer = document.getElementById("qr-results");
 var countResults = 0;
 var lastQr = null;
 
-// lo que pasa cuando se detecta el QR
 function onScanSuccess(decodedText, decodedResult) {
-	
+	// si se lee un nuevo codigo
 	if (lastQr != decodedText) {
 		// consola
 		console.log(`Code matched = ${decodedText}`, decodedResult);
@@ -17,24 +16,14 @@ function onScanSuccess(decodedText, decodedResult) {
 		resultContainer.innerHTML += `<div>[${countResults}] - ${decodedText}</div>`;
 	}
 }
-
-// lo que pasa cuando no se detecta nada
-function onScanFailure(error) {
-	// handle scan failure, usually better to ignore and keep scanning.
-	// for example:
-	//console.warn(`Code scan error = ${error}`);
-}
-
-// --------------- OBJETOS ---------------
 // crear objeto de API
 let scanner = new Html5QrcodeScanner(
 	"qr-reader",
 	{ fps: 10, qrbox: { width: 250, height: 250 } },
 	/* verbose= */ false
 );
-
 // ejecutar objeto
-scanner.render(onScanSuccess, onScanFailure);
+scanner.render(onScanSuccess);
 
 // --------------- FORMULARIO CLIENTE ---------------
 var fcliente = document.getElementById("cliente-info");
@@ -49,8 +38,9 @@ var departamento = document.getElementById("c-departamento").value;
 
 // escuchando cuando se envie el formulario
 fcliente.addEventListener("submit", (event) => {
+	// evitar que se borren los datos ingresados en el formulario hasta no estar seguros de que todo esta bien
 	event.preventDefault();
-
+	// mostrar datos en consola
 	console.log(
 		nombre,
 		apellido,
@@ -60,4 +50,5 @@ fcliente.addEventListener("submit", (event) => {
 		telefono,
 		departamento
 	);
+	// rellenar excel
 });
