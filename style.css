@@ -1,23 +1,78 @@
+:root {
+	--awhite: #f5f5f7;
+	--agray: #48484a;
+	--ablack: #0e0e0e;
+}
 html {
-	font-family: Helvetica, sans-serif;
+	font-family: Helvetica;
+	color: var(--awhite);
+	background-color: var(--ablack);
+	padding: 20px;
 }
-
-nav {
-	background-color: bisque;
+input {
+	padding: 10px;
+	box-sizing: border-box;
+	border: none;
+	border-radius: 0.5em;
+	background-color: var(--awhite);
 }
-#cliente {
-	background-color: cadetblue;
+input:focus {
+	border: 3px solid var(--agray);
 }
-#seriales {
-	background-color: beige;
-}
-
 footer {
 	text-align: center;
-	background-color: grey;
-	color: white;
+	background-color: var(--agray);
 	padding: 10px;
 }
+
+/* formato de formulario de entrada de datos */
+.col-25 {
+	float: left;
+	width: 25%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.col-75 {
+	float: left;
+	width: 75%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+/* TODO cambiar de tablas a grids para mejor organización */
+/* Clear floats after the columns */
+.row::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Formulario responsivo, estackear cuando baja de los pixeles indicados */
+@media screen and (max-width: 670px) {
+	.col-25,
+	.col-75,
+	input{
+		width: 100%;
+		margin-top: 0;
+	}
+}
+
+/* otros detalles especificos */
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.white_border {
+	border: 1px solid var(--agray);
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px;
+}
+.abutton{
+	width: 10em;
+}
+
 
 /* #qr-reader {
 	width: 50%;
