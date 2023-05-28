@@ -75,12 +75,12 @@ footer {
 
 #qr-reader-box {
 	margin: auto;
-	width: 70%;
+	width: 75%;
 }
 
 
 /* QR UI estilizada */
-button.html5-qrcode-element {
+.html5-qrcode-element {
 	border-radius: 6px;
 	padding: 10px 16px;
 	cursor: pointer;

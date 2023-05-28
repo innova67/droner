@@ -21,14 +21,14 @@ let scanner = new Html5QrcodeScanner(
 	"qr-reader-box",
 	{ 
 		fps: 10, 
-		qrbox: { width: 250, height: 250 },
+		qrbox: { width: 300, height: 300 },
 		rememberLastUsedCamera: true, 
 		showTorchButtonIfSupported: true 
 	},
-	/* verbose= */ true
+	/* verbose= */ false
 );
 
-// ejecutar objeto
+// renderizar objeto API
 scanner.render(onScanSuccess);
 
 
