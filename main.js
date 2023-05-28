@@ -21,8 +21,7 @@ let scanner = new Html5QrcodeScanner(
 	"qr-reader-box",
 	{ 
 		fps: 10, 
-		qrbox: { width: 250, height: 250 }, 
-		aspectRatio: 43, 
+		qrbox: { width: 250, height: 250 },
 		rememberLastUsedCamera: true, 
 		showTorchButtonIfSupported: true 
 	},
