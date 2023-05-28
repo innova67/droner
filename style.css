@@ -73,8 +73,16 @@ footer {
 	width: 10em;
 }
 
+#qr-reader-box {
+	margin: auto;
+	width: 70%;
+}
 
-/* #qr-reader {
-	width: 50%;
-	align-self: center;
-} */
+
+/* QR UI estilizada */
+button.html5-qrcode-element {
+	border-radius: 6px;
+	padding: 10px 16px;
+	cursor: pointer;
+	margin-bottom: 15px;
+}

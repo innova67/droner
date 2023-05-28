@@ -1,5 +1,5 @@
 // --------------- LECTOR QR ---------------
-var resultContainer = document.getElementById("qr-results");
+var resultContainer = document.getElementById("seriales");
 var countResults = 0;
 var lastQr = null;
 
@@ -18,12 +18,22 @@ function onScanSuccess(decodedText, decodedResult) {
 }
 // crear objeto de API
 let scanner = new Html5QrcodeScanner(
-	"qr-reader",
-	{ fps: 10, qrbox: { width: 250, height: 250 } },
-	/* verbose= */ false
+	"qr-reader-box",
+	{ 
+		fps: 10, 
+		qrbox: { width: 250, height: 250 }, 
+		aspectRatio: 43, 
+		rememberLastUsedCamera: true, 
+		showTorchButtonIfSupported: true 
+	},
+	/* verbose= */ true
 );
+
 // ejecutar objeto
 scanner.render(onScanSuccess);
+
+
+
 
 // --------------- FORMULARIO CLIENTE ---------------
 var fcliente = document.getElementById("cliente-info");
