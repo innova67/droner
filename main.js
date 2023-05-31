@@ -72,6 +72,17 @@ function generarExcel() {
 	// Rellenar libro de trabajo
 	const workbook = jalarExcel.then(workbook => {
 
+		// obtener fecha para nombre de archivo
+		const fecha = new Date();
+		const anoActual = fecha.getFullYear();
+		const hoy = fecha.getDate();
+		const mesActual = fecha.getMonth() + 1;
+
+		console.log(fecha);
+		console.log(anoActual);
+		console.log(hoy);
+		console.log(mesActual);
+
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
