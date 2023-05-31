@@ -49,17 +49,42 @@ function generarExcel() {
 	// Crear objeto con datos a guardar
 	const data = { nombre, apellido, empresa, direccion, email, telefono, departamento };
 
-	// Obtener libro de trabajo actual
-	const workbook = XlsxPopulate.fromBlankAsync().then(workbook => {
+	// Obtener libro de trabajo del servidor
+	function jalarExcel() {
+		return new Promise(function (resolve, reject) {
+			var req = new XMLHttpRequest();
+			var url = "templates/template_diagnostico.xlsx";
+			req.open("GET", url, true);
+			req.responseType = "arraybuffer";
+			req.onreadystatechange = function () {
+				if (req.readyState === 4){
+					if (req.status === 200) {
+						resolve(XlsxPopulate.fromDataAsync(req.response));
+					} else {
+						reject("Received a " + req.status + " HTTP code.");
+					}
+				}
+			};
+			req.send();
+		});
+    }
+	
+	// Rellenar libro de trabajo
+	const workbook = jalarExcel.then(workbook => {
 
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
-		sheet.cell("A1").value([Object.keys(data)]);
-		sheet.cell("A2").value([Object.values(data)]);
+		let auxNombre = [Object.values(data.nombre)] + " " + [Object.values(data.apellido)];
+		sheet.cell("A25").value(auxNombre);
+		sheet.cell("D25").value([Object.values(data.empresa)]);
+		sheet.cell("G25").value([Object.values(data.direccion)]);
+		sheet.cell("A28").value([Object.values(data.email)]);
+		sheet.cell("D28").value([Object.values(data.telefono)]);
+		sheet.cell("G28").value([Object.values(data.departamento)]);
 
-		// Generar PDF con el blob llenado
+		// Descargar excel
 		workbook.outputAsync().then(function (blob) {
 			// Crear un objeto URL para el Blob
 			var url = URL.createObjectURL(blob);
@@ -73,7 +98,7 @@ function generarExcel() {
 				// Descargar archivo Excel
 				var excelLink = document.createElement("a");
 				excelLink.href = url;
-				excelLink.download = "informacion.xlsx";
+				excelLink.download = "prueba.xlsx";
 				excelLink.click();
 				
 				// Liberar el objeto URL
@@ -87,16 +112,6 @@ function generarExcel() {
 fcliente.addEventListener("submit", (event) => {
 	// evitar que se borren los datos ingresados en el formulario hasta no estar seguros de que todo esta bien
 	event.preventDefault();
-	// mostrar datos en consola
-	console.log(
-		nombre,
-		apellido,
-		empresa,
-		direccion,
-		email,
-		telefono,
-		departamento
-	);
 	// rellenar excel
 	generarExcel()
 });
