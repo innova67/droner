@@ -77,21 +77,21 @@ function generarExcel() {
 		const mesActual = fecha.getMonth() + 1;
 
 		console.log(fecha);
-		console.log(anoActual);
-		console.log(hoy);
-		console.log(mesActual);
+		console.log(typeof nombre);
+		console.log(apellido);
+		console.log(empresa);
 
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
 		let auxNombre = nombre + " " + apellido;
-		sheet.cell("A25").value(auxNombre);
-		sheet.cell("A28").value(email);
+		// sheet.cell("A25").value(auxNombre);
+		// sheet.cell("A28").value(email);
 		sheet.cell("D25").value(direccion);
+		// sheet.cell("D28").value(telefono);
 		sheet.cell("G25").value(empresa);
-		// sheet.cell("D28").value([Object.values(data.telefono)]);
-		// sheet.cell("G28").value([Object.values(data.departamento)]);
+		sheet.cell("G28").value(departamento);
 
 		// Descargar excel
 		workbook.outputAsync().then(function (blob) {
@@ -104,10 +104,16 @@ function generarExcel() {
 
 			// Cuando el FileReader termine de leer el Blob, generar archivo Excel y descargar
 			reader.onloadend = function () {
+
+				if (mesActual < 10) {
+					mesActual = "0"+ mesActual.toString();
+				}
+				let auxNomArch = hoy.toString()+mesActual.toString()+anoActual.toString()+"-01"+".xlsx";
+
 				// Descargar archivo Excel
 				var excelLink = document.createElement("a");
 				excelLink.href = url;
-				excelLink.download = "prueba.xlsx";
+				excelLink.download = auxNomArch;
 				excelLink.click();
 				
 				// Liberar el objeto URL
