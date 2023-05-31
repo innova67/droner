@@ -82,7 +82,6 @@ function generarExcel() {
 		console.log(anoActual);
 		console.log(hoy);
 		console.log(mesActual);
-		console.log([Object.value(data.empresa)]);
 		console.log(Object.value(data.empresa));
 
 		// Usar la primer hoja del libro de trabajo
