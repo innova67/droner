@@ -45,6 +45,44 @@ var email = document.getElementById("c-email").value;
 var telefono = document.getElementById("c-telefono").value;
 var departamento = document.getElementById("c-departamento").value;
 
+function generarExcel() {
+	// Crear objeto con datos a guardar
+	const data = { nombre, apellido, empresa, direccion, email, telefono, departamento };
+
+	// Obtener libro de trabajo actual
+	const workbook = XlsxPopulate.fromBlankAsync().then(workbook => {
+
+		// Usar la primer hoja del libro de trabajo
+		const sheet = workbook.sheet(0);
+
+		// Agregar datos a la hoja
+		sheet.cell("A1").value([Object.keys(data)]);
+		sheet.cell("A2").value([Object.values(data)]);
+
+		// Generar PDF con el blob llenado
+		workbook.outputAsync().then(function (blob) {
+			// Crear un objeto URL para el Blob
+			var url = URL.createObjectURL(blob);
+
+			// Crear un objeto FileReader para leer el Blob como ArrayBuffer
+			var reader = new FileReader();
+			reader.readAsArrayBuffer(blob);
+
+			// Cuando el FileReader termine de leer el Blob, generar archivo Excel y descargar
+			reader.onloadend = function () {
+				// Descargar archivo Excel
+				var excelLink = document.createElement("a");
+				excelLink.href = url;
+				excelLink.download = "informacion.xlsx";
+				excelLink.click();
+				
+				// Liberar el objeto URL
+				URL.revokeObjectURL(url);
+			};
+		});
+	});
+}
+
 // escuchando cuando se envie el formulario
 fcliente.addEventListener("submit", (event) => {
 	// evitar que se borren los datos ingresados en el formulario hasta no estar seguros de que todo esta bien
@@ -60,4 +98,5 @@ fcliente.addEventListener("submit", (event) => {
 		departamento
 	);
 	// rellenar excel
+	generarExcel()
 });
