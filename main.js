@@ -47,6 +47,9 @@ var departamento = document.getElementById("c-departamento").value;
 
 function generarExcel() {
 
+	// Crear objeto con datos a guardar
+	const data = { nombre, apellido, empresa, direccion, email, telefono, departamento };
+
 	// Obtener libro de trabajo del servidor
 	function jalarExcel() {
 		return new Promise(function (resolve, reject) {
@@ -77,20 +80,22 @@ function generarExcel() {
 		let mesActual = fecha.getMonth() + 1;
 
 		console.log(fecha);
-		console.log(typeof nombre);
-		console.log(apellido);
-		console.log(empresa);
+		console.log(typeof data.nombre);
+		console.log(data.nombre);
+		console.log(data.apellido);
+		console.log(data.empresa);
 
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
-		let auxNombre = nombre + " " + apellido;
-		// sheet.cell("A25").value(auxNombre);
+		let auxNombre = data.nombre + " " + data.apellido;
+		console.log(auxNombre);
+		sheet.cell("A25").value(auxNombre);
 		// sheet.cell("A28").value(email);
-		sheet.cell("D25").value(direccion);
+		sheet.cell("D25").value(empresa);
 		// sheet.cell("D28").value(telefono);
-		sheet.cell("G25").value(empresa);
+		sheet.cell("G25").value(direccion);
 		sheet.cell("G28").value(departamento);
 
 		// Descargar excel
