@@ -132,7 +132,6 @@ fcliente.addEventListener("submit", (event) => {
 	// evitar que se borren los datos ingresados en el formulario hasta no estar seguros de que todo esta bien
 	event.preventDefault();
 
-	console.log(data);
 	console.log(nombre);
 	console.log(apellido);
 	console.log(empresa);
