@@ -91,9 +91,9 @@ function generarExcel() {
 		sheet.cell("A25").value(auxNombre);
 		sheet.cell("D25").value([Object.values(data.empresa)]);
 		sheet.cell("G25").value([Object.values(data.direccion)]);
-		sheet.cell("A28").value([Object.values(data.email)]);
-		sheet.cell("D28").value([Object.values(data.telefono)]);
-		sheet.cell("G28").value([Object.values(data.departamento)]);
+		// sheet.cell("A28").value([Object.values(data.email)]);
+		// sheet.cell("D28").value([Object.values(data.telefono)]);
+		// sheet.cell("G28").value([Object.values(data.departamento)]);
 
 		// Descargar excel
 		workbook.outputAsync().then(function (blob) {
