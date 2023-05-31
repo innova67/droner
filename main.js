@@ -47,6 +47,9 @@ var departamento = document.getElementById("c-departamento").value;
 
 function generarExcel() {
 
+	// Crear objeto con datos a guardar
+	let data = { nombre, apellido, empresa, direccion, email, telefono, departamento };
+
 	// Obtener libro de trabajo del servidor
 	function jalarExcel() {
 		return new Promise(function (resolve, reject) {
@@ -77,7 +80,6 @@ function generarExcel() {
 		let mesActual = fecha.getMonth() + 1;
 
 		console.log(fecha);
-		console.log(typeof data.nombre);
 		console.log(data.nombre);
 		console.log(data.apellido);
 		console.log(data.empresa);
@@ -130,11 +132,10 @@ fcliente.addEventListener("submit", (event) => {
 	// evitar que se borren los datos ingresados en el formulario hasta no estar seguros de que todo esta bien
 	event.preventDefault();
 
-	
-	// Crear objeto con datos a guardar
-	let data = { nombre, apellido, empresa, direccion, email, telefono, departamento };
-
 	console.log(data);
+	console.log(nombre);
+	console.log(apellido);
+	console.log(empresa);
 
 	// rellenar excel
 	generarExcel();
