@@ -91,6 +91,7 @@ function generarExcel() {
 		// Agregar datos a la hoja
 		let auxNombre = data.nombre + " " + data.apellido;
 		console.log(auxNombre);
+		console.log(typeof auxNombre);
 		sheet.cell("A25").value(auxNombre);
 		// sheet.cell("A28").value(email);
 		sheet.cell("D25").value(empresa);
