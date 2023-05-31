@@ -72,9 +72,9 @@ function generarExcel() {
 
 		// obtener fecha para nombre de archivo
 		const fecha = new Date();
-		const anoActual = fecha.getFullYear();
-		const hoy = fecha.getDate();
-		const mesActual = fecha.getMonth() + 1;
+		let anoActual = fecha.getFullYear();
+		let hoy = fecha.getDate();
+		let mesActual = fecha.getMonth() + 1;
 
 		console.log(fecha);
 		console.log(typeof nombre);
