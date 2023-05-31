@@ -70,7 +70,7 @@ function generarExcel() {
     }
 	
 	// Rellenar libro de trabajo
-	const workbook = jalarExcel.then(workbook => {
+	const workbook = jalarExcel().then(workbook => {
 
 		// obtener fecha para nombre de archivo
 		const fecha = new Date();
