@@ -82,13 +82,15 @@ function generarExcel() {
 		console.log(anoActual);
 		console.log(hoy);
 		console.log(mesActual);
+		console.log([Object.value(data.empresa)]);
+		console.log(Object.value(data.empresa));
 
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
 		let auxNombre = [Object.value(data.nombre)] + " " + [Object.value(data.apellido)];
-		sheet.cell("A25").value(auxNombre);
+		// sheet.cell("A25").value(auxNombre);
 		sheet.cell("D25").value([Object.value(data.empresa)]);
 		sheet.cell("G25").value([Object.value(data.direccion)]);
 		// sheet.cell("A28").value([Object.values(data.email)]);
