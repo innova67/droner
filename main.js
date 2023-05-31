@@ -46,8 +46,6 @@ var telefono = document.getElementById("c-telefono").value;
 var departamento = document.getElementById("c-departamento").value;
 
 function generarExcel() {
-	// Crear objeto con datos a guardar
-	const data = { nombre, apellido, empresa, direccion, email, telefono, departamento };
 
 	// Obtener libro de trabajo del servidor
 	function jalarExcel() {
@@ -82,17 +80,16 @@ function generarExcel() {
 		console.log(anoActual);
 		console.log(hoy);
 		console.log(mesActual);
-		console.log(Object.value(data.empresa));
 
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
-		let auxNombre = [Object.value(data.nombre)] + " " + [Object.value(data.apellido)];
-		// sheet.cell("A25").value(auxNombre);
-		sheet.cell("D25").value([Object.value(data.empresa)]);
-		sheet.cell("G25").value([Object.value(data.direccion)]);
-		// sheet.cell("A28").value([Object.values(data.email)]);
+		let auxNombre = nombre + " " + apellido;
+		sheet.cell("A25").value(auxNombre);
+		sheet.cell("A28").value(email);
+		sheet.cell("D25").value(direccion);
+		sheet.cell("G25").value(empresa);
 		// sheet.cell("D28").value([Object.values(data.telefono)]);
 		// sheet.cell("G28").value([Object.values(data.departamento)]);
 
