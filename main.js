@@ -35,40 +35,51 @@ scanner.render(onScanSuccess);
 
 
 // --------------- FORMULARIO CLIENTE ---------------
+
+// localizando formulario
 var fcliente = document.getElementById("cliente-info");
 
-var nombre = document.getElementById("c-nombre").value;
-var apellido = document.getElementById("c-apellidos").value;
-var empresa = document.getElementById("c-empresa").value;
-var direccion = document.getElementById("c-direccion").value;
-var email = document.getElementById("c-email").value;
-var telefono = document.getElementById("c-telefono").value;
-var departamento = document.getElementById("c-departamento").value;
+// escuchando cuando se envie el formulario
+fcliente.addEventListener("submit", (event) => {
+	
+	// evitar que se borren los datos ingresados en el formulario hasta no estar seguros de que todo esta bien
+	event.preventDefault();
 
-function generarExcel() {
+	// jalando datos ingresados
+	var nombre = document.getElementById("c-nombre").value;
+	var apellido = document.getElementById("c-apellidos").value;
+	var empresa = document.getElementById("c-empresa").value;
+	var direccion = document.getElementById("c-direccion").value;
+	var email = document.getElementById("c-email").value;
+	var telefono = document.getElementById("c-telefono").value;
+	var departamento = document.getElementById("c-departamento").value;
 
-	// Crear objeto con datos a guardar
-	let data = { nombre, apellido, empresa, direccion, email, telefono, departamento };
+	// rellenar excel
+	generarExcel(nombre,apellido,empresa,direccion,email,telefono,departamento);
+});
 
-	// Obtener libro de trabajo del servidor
-	function jalarExcel() {
-		return new Promise(function (resolve, reject) {
-			var req = new XMLHttpRequest();
-			var url = "templates/template_diagnostico.xlsx";
-			req.open("GET", url, true);
-			req.responseType = "arraybuffer";
-			req.onreadystatechange = function () {
-				if (req.readyState === 4){
-					if (req.status === 200) {
-						resolve(XlsxPopulate.fromDataAsync(req.response));
-					} else {
-						reject("Received a " + req.status + " HTTP code.");
-					}
+// Obtener libro de trabajo del servidor
+function jalarExcel() {
+	return new Promise(function (resolve, reject) {
+		var req = new XMLHttpRequest();
+		var url = "templates/template_diagnostico.xlsx";
+		req.open("GET", url, true);
+		req.responseType = "arraybuffer";
+		req.onreadystatechange = function () {
+			if (req.readyState === 4){
+				if (req.status === 200) {
+					resolve(XlsxPopulate.fromDataAsync(req.response));
+				} else {
+					reject("Received a " + req.status + " HTTP code.");
 				}
-			};
-			req.send();
-		});
-    }
+			}
+		};
+		req.send();
+	});
+}
+
+// rellenando datos y exportando excel
+function generarExcel(nom, ape, emp, dir, em, tel, dep) {
 	
 	// Rellenar libro de trabajo
 	const workbook = jalarExcel().then(workbook => {
@@ -80,22 +91,18 @@ function generarExcel() {
 		let mesActual = fecha.getMonth() + 1;
 
 		console.log(fecha);
-		console.log(data.nombre);
-		console.log(data.apellido);
-		console.log(data.empresa);
 
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
-		let auxNombre = data.nombre + " " + data.apellido;
-		console.log(auxNombre);
-		sheet.cell("A25").value(auxNombre);
-		// sheet.cell("A28").value(email);
-		sheet.cell("D25").value(empresa);
-		// sheet.cell("D28").value(telefono);
-		sheet.cell("G25").value(direccion);
-		sheet.cell("G28").value(departamento);
+		let auxNom = nom + " " + ape;
+		sheet.cell("A25").value(auxNom);
+		sheet.cell("A28").value(em);
+		sheet.cell("D25").value(emp);
+		sheet.cell("D28").value(tel);
+		sheet.cell("G25").value(dir);
+		sheet.cell("G28").value(dep);
 
 		// Descargar excel
 		workbook.outputAsync().then(function (blob) {
@@ -126,16 +133,3 @@ function generarExcel() {
 		});
 	});
 }
-
-// escuchando cuando se envie el formulario
-fcliente.addEventListener("submit", (event) => {
-	// evitar que se borren los datos ingresados en el formulario hasta no estar seguros de que todo esta bien
-	event.preventDefault();
-
-	console.log(nombre);
-	console.log(apellido);
-	console.log(empresa);
-
-	// rellenar excel
-	generarExcel();
-});
