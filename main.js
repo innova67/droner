@@ -90,12 +90,25 @@ function generarExcel(nom, ape, emp, dir, em, tel, dep) {
 		let hoy = fecha.getDate();
 		let mesActual = fecha.getMonth() + 1;
 
+		if (mesActual < 10) {
+			mesActual = "0"+ mesActual.toString();
+		}
+		if (hoy < 10) {
+			hoy = "0"+ mesActual.toString();
+		}
+
+		let auxNomArch = hoy.toString()+mesActual.toString()+anoActual.toString()+"-01"+".xlsx";
+
 		console.log(fecha);
 
 		// Usar la primer hoja del libro de trabajo
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
+		sheet.cell("I5").value(auxNomArch);
+		sheet.cell("H9").value(hoy);
+		sheet.cell("I9").value(mesActual);
+		sheet.cell("J9").value(anoActual);
 		let auxNom = nom + " " + ape;
 		sheet.cell("A25").value(auxNom);
 		sheet.cell("A28").value(em);
@@ -115,11 +128,6 @@ function generarExcel(nom, ape, emp, dir, em, tel, dep) {
 
 			// Cuando el FileReader termine de leer el Blob, generar archivo Excel y descargar
 			reader.onloadend = function () {
-
-				if (mesActual < 10) {
-					mesActual = "0"+ mesActual.toString();
-				}
-				let auxNomArch = hoy.toString()+mesActual.toString()+anoActual.toString()+"-01"+".xlsx";
 
 				// Descargar archivo Excel
 				var excelLink = document.createElement("a");
