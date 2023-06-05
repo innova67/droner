@@ -94,7 +94,7 @@ function generarExcel(nom, ape, emp, dir, em, tel, dep) {
 			mesActual = "0"+ mesActual.toString();
 		}
 		if (hoy < 10) {
-			hoy = "0"+ mesActual.toString();
+			hoy = "0"+ hoy.toString();
 		}
 
 		let auxNomArch = hoy.toString()+mesActual.toString()+anoActual.toString()+"-01"+".xlsx";
@@ -105,7 +105,7 @@ function generarExcel(nom, ape, emp, dir, em, tel, dep) {
 		const sheet = workbook.sheet(0);
 
 		// Agregar datos a la hoja
-		sheet.cell("I5").value(auxNomArch);
+		sheet.cell("I5").value(hoy.toString()+mesActual.toString()+anoActual.toString()+"-01");
 		sheet.cell("H9").value(hoy);
 		sheet.cell("I9").value(mesActual);
 		sheet.cell("J9").value(anoActual);
