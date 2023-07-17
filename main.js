@@ -2,6 +2,101 @@
 var resultContainer = document.getElementById("seriales");
 var countResults = 0;
 var lastQr = null;
+const t10Parts = [
+	"Dron",
+	"Control remoto",
+	"Batería Agras",	
+	"Cargador T10",
+	"Fuente de cargador",
+	"Hub de carga WB37",
+	"Batería WB37",
+	"AC Adapter",
+	"Cargador 15W",
+	"Modem 4G",
+	"Tanque de liquidos",
+	"ESC",
+	"SOLENOIDE",
+	"CAMARA FPV",
+	"RADAR OMNIDIRECCIONAL",
+	"ANTENA RTK",
+	"POWER BOARD",
+	"DISTRIBUTION BOARD",
+	"BAROMETRO",
+	"RADAR SUPERIOR",
+	"AERIAL ELECTRONICS",
+	"SPRAYING MODULE",
+	"RF MODULE",
+	"BOMBA",
+	"SENSOR DE FLUJO",
+	"Sensor de peso",
+
+	"CORREA CONTROL REMOTO",
+	"CABLE AC",
+	"SET DE BOQUILLAS",
+	"CABLE USB TIPO C",
+	"SENSOR DE NIVEL",
+	"FILTRO TANQUE SUPERIOR",
+	"FILTRO TANQUE INFERIOR",
+	"FLOTADOR TANQUE",
+	"VALVULA DE TANQUE LIQUIDO"
+]
+
+const t10Serials = [
+	"4VNBJ7500",
+	"4D2BJ7H00",
+	"3VJPJ64CA",
+	"43PHJ5X36",
+	"4Q2HJ4X11",
+	"0J6BJ7BR0",
+	"0DNAI6183",
+	"F18253211",
+	"143CHAQ13",
+	"320715033",
+
+	"4VMBJ7500",
+	"3TXBJ6T0A",
+	"4BCBJ7500",
+	"3TWBJ7500",
+	"3TSDJ6J00",
+	"3TRBJ6T00",
+	"3TUBJ6H00",
+	"44FBJ6S10",
+	"3TKBJ6U00",
+	"3TTDJ4F00",
+
+	"3TNDJ6P00",
+	"3TMBJ7500",
+	"3TPBJ6P00",
+	"3TZBJ6M00",
+	"3TYBJ6P00",
+	"52VCK8A00"
+]
+
+
+function serialValidator(serial) {
+	// inicializar flag en true para no advertir nada
+	var noflag = 0;
+	//obtener los primeros 9 numeros del serial escaneado
+	var tempComparador = serial.slice(0,9);
+	// comparar con el array de seriales
+	function compararSerial(element, index){
+		// si se encuentra agregar a la lista de items el nombre asociado al serial
+		if (tempComparador == element.toString()) {
+			resultContainer.innerHTML += `<div>[${t10Parts[index]}] - ${serial}</div>`;
+		}
+		// sino avisar por consola 
+		else {
+			noflag++;
+		}
+	};
+	// loop en los seriales para comparar
+	t10Serials.forEach(compararSerial);
+
+	// si se pasa por todo el array sin encontrar un match avisar por consola
+	if (noflag == t10Serials.length) {
+		console.log("no se encontro el serial en la DB");
+	}
+}
 
 function onScanSuccess(decodedText, decodedResult) {
 	// si se lee un nuevo codigo
@@ -13,7 +108,7 @@ function onScanSuccess(decodedText, decodedResult) {
 		// sumar contador
 		++countResults;
 		// mostrar en la pagina lo que se detecta
-		resultContainer.innerHTML += `<div>[${countResults}] - ${decodedText}</div>`;
+		serialValidator(decodedText);
 	}
 }
 // crear objeto de API
