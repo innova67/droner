@@ -69,7 +69,7 @@ const t10Serials = [
 	"3TPBJ6P00",
 	"3TZBJ6M00",
 	"3TYBJ6P00",
-	"52VCK8A00"
+	"52VCK8A00" 
 ]
 
 
